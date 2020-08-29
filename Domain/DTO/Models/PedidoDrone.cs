@@ -5,10 +5,10 @@ namespace devboost.dronedelivery.felipe.DTO.Models
 {
     public class PedidoDrone
     {        
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Required(ErrorMessage = "Drone Id deve ser informado!")]
-        public int DroneId { get; set; }
+        public int? DroneId { get; set; }
 
         public Drone Drone { get; set; }
 

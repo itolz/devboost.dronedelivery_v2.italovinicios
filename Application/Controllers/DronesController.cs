@@ -32,6 +32,7 @@ namespace devboost.dronedelivery.felipe.Controllers
         /// <returns></returns>
         // GET: api/Drones/5
         [HttpGet("GetStatusDrone")]
+        [AllowAnonymous]
         public async Task<ActionResult<List<StatusDroneDto>>> GetStatusDrone()
         {
             return Ok(await _droneFacade.GetDroneStatusAsync());
@@ -43,14 +44,15 @@ namespace devboost.dronedelivery.felipe.Controllers
         /// <param name="drone">Drone</param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(Roles.ROLE_API_DRONE)]
+        [Authorize]
+        //[Authorize(Roles.ROLE_API_DRONE)]
         public async Task<ActionResult<Drone>> PostDrone(Drone drone)
         {
             drone.Perfomance = (drone.Autonomia / 60.0f) * drone.Velocidade;
 
             await _droneRepository.SaveDrone(drone);
 
-            return CreatedAtAction("GetDrone", new { id = drone.Id }, drone);
+            return CreatedAtAction("GetStatusDrone", null, null);
         }
 
 

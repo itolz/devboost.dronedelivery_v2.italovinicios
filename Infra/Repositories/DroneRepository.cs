@@ -28,9 +28,14 @@ namespace devboost.dronedelivery.felipe.EF.Repositories
         }
 
         public async Task SaveDrone(Drone drone)
+
         {
+            drone.Id = null; 
+            
             _context.Drone.Add(drone);
+            
             await _context.SaveChangesAsync();
+            
         }
 
         public Drone RetornaDrone()
@@ -45,7 +50,7 @@ namespace devboost.dronedelivery.felipe.EF.Repositories
             var resultado = await conexao.QueryAsync<StatusDroneDto>(GetStatusSqlCommand()).ConfigureAwait(false);
             return resultado.ToList();
         }
-        public async Task<DroneStatusDto> RetornaDroneStatus(int droneId)
+        public async Task<DroneStatusDto> RetornaDroneStatus(int? droneId)
         {
             using SqlConnection conexao = new SqlConnection(_connectionString);
             return (await conexao.QueryAsync<DroneStatusDto>(GetSqlCommand(droneId))
@@ -84,7 +89,7 @@ namespace devboost.dronedelivery.felipe.EF.Repositories
             return stringBuilder.ToString();
         }
 
-        private static string GetSqlCommand(int droneId)
+        private static string GetSqlCommand(int? droneId)
         {
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("SELECT D.*");

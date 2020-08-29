@@ -8,7 +8,7 @@ namespace devboost.dronedelivery.felipe.EF.Repositories.Interfaces
     public interface IDroneRepository
     {
         Task<List<StatusDroneDto>> GetDroneStatusAsync();
-        Task<DroneStatusDto> RetornaDroneStatus(int droneId);
+        Task<DroneStatusDto> RetornaDroneStatus(int? droneId);
         Drone RetornaDrone();
         Task SaveDrone(Drone drone);
 
