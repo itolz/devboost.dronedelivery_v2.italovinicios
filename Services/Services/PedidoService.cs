@@ -20,7 +20,7 @@ namespace devboost.dronedelivery.felipe.Services
         {
             var originPoint = new Point();
 
-            var distance = _coordinateService.GetKmDistance(originPoint, pedido.GetPoint());
+            var distance = _coordinateService.GetKmDistance(originPoint, pedido.Cliente.GetPoint());
 
 
             var drone = await _droneService.GetAvailiableDroneAsync(distance, pedido).ConfigureAwait(false);

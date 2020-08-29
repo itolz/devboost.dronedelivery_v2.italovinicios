@@ -4,9 +4,9 @@ namespace devboost.dronedelivery.felipe.DTO.Extensions
 {
     public static class PedidoExtensions
     {
-        public static Point GetPoint(this Pedido pedido)
+        public static Point GetPoint(this Cliente cliente)
         {
-            return new Point(pedido.Latitude, pedido.Longitude);
+            return new Point(cliente.Latitude, cliente.Longitude);
         }
     }
 }

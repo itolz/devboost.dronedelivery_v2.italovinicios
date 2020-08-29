@@ -23,5 +23,7 @@ namespace devboost.dronedelivery.felipe.DTO.Models
         [Required(ErrorMessage = "Status Envio deve ser informado!")]
         public int StatusEnvio { get; set; }
         public DateTime DataHoraFinalizacao { get; set; }
+
+        public Cliente Cliente { get; set; }
     }
 }

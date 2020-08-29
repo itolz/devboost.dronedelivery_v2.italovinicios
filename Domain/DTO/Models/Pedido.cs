@@ -12,11 +12,11 @@ namespace devboost.dronedelivery.felipe.DTO.Models
         [Range(1, int.MaxValue, ErrorMessage = "A Peso minimo deve ser 1.")]
         public int Peso { get; set; }
 
-        [Required(ErrorMessage = "Latitude deve ser informada!")]
-        public double Latitude { get; set; }
+        //[Required(ErrorMessage = "Latitude deve ser informada!")]
+        //public double Latitude { get; set; }
 
-        [Required(ErrorMessage = "Longitude deve ser informada!")]
-        public double Longitude { get; set; }
+        //[Required(ErrorMessage = "Longitude deve ser informada!")]
+        //public double Longitude { get; set; }
         
         public DateTime DataHoraInclusao { get; set; }
 
@@ -25,5 +25,7 @@ namespace devboost.dronedelivery.felipe.DTO.Models
         
         public DateTime DataUltimaAlteracao { get; set; }
         public DateTime DataHoraFinalizacao { get; set; }
+
+        public Cliente Cliente { get; set; }
     }
 }

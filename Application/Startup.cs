@@ -47,6 +47,7 @@ namespace devboost.dronedelivery.felipe
             services.AddSingleton<ICoordinateService, CoordinateService>();
             services.AddSingleton<IPedidoFacade, PedidoFacade>();
             services.AddSingleton<IDroneFacade, DroneFacade>();
+            services.AddSingleton<IClienteRepository, ClienteRepository>(); 
 
             // Configurando o uso da classe de contexto para
             // acesso às tabelas do ASP.NET Identity Core

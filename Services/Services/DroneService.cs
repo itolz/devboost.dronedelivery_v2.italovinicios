@@ -37,7 +37,7 @@ namespace devboost.dronedelivery.felipe.Services
             var drones = (await _pedidoDroneRepository.RetornaPedidosEmAberto())
                 .Select(d => new
                 {
-                    distance = _coordinateService.GetKmDistance(d.Pedido.GetPoint(), pedido.GetPoint()),
+                    distance = _coordinateService.GetKmDistance(d.Cliente.GetPoint(), pedido.Cliente.GetPoint()),
                     droneId = d.DroneId
                 }).OrderBy(p => p.distance);
 
