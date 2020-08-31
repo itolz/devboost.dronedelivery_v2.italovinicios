@@ -13,7 +13,6 @@ namespace devboost.dronedelivery.felipe.Migrations
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
-#pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
@@ -25,9 +24,6 @@ namespace devboost.dronedelivery.felipe.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("int");
 
                     b.Property<double>("Latitude")
                         .HasColumnType("float");
@@ -47,7 +43,7 @@ namespace devboost.dronedelivery.felipe.Migrations
 
             modelBuilder.Entity("devboost.dronedelivery.felipe.DTO.Models.Drone", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -79,7 +75,7 @@ namespace devboost.dronedelivery.felipe.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClienteId")
+                    b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataHoraFinalizacao")
@@ -106,13 +102,10 @@ namespace devboost.dronedelivery.felipe.Migrations
 
             modelBuilder.Entity("devboost.dronedelivery.felipe.DTO.Models.PedidoDrone", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ClienteId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("DataHoraFinalizacao")
                         .HasColumnType("datetime2");
@@ -120,7 +113,8 @@ namespace devboost.dronedelivery.felipe.Migrations
                     b.Property<double>("Distancia")
                         .HasColumnType("float");
 
-                    b.Property<int>("DroneId")
+                    b.Property<int?>("DroneId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("PedidoId")
@@ -130,8 +124,6 @@ namespace devboost.dronedelivery.felipe.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClienteId");
 
                     b.HasIndex("DroneId");
 
@@ -143,16 +135,14 @@ namespace devboost.dronedelivery.felipe.Migrations
             modelBuilder.Entity("devboost.dronedelivery.felipe.DTO.Models.Pedido", b =>
                 {
                     b.HasOne("devboost.dronedelivery.felipe.DTO.Models.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteId");
+                        .WithMany("Pedidos")
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("devboost.dronedelivery.felipe.DTO.Models.PedidoDrone", b =>
                 {
-                    b.HasOne("devboost.dronedelivery.felipe.DTO.Models.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteId");
-
                     b.HasOne("devboost.dronedelivery.felipe.DTO.Models.Drone", "Drone")
                         .WithMany()
                         .HasForeignKey("DroneId")
@@ -165,7 +155,6 @@ namespace devboost.dronedelivery.felipe.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
-#pragma warning restore 612, 618
         }
     }
 }

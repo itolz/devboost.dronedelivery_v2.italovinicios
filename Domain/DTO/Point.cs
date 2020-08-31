@@ -2,14 +2,14 @@
 {
     public class Point
     {
-        private const double LATITUDE_BASE = -23.5880684;
-        private const double LONGITUDE_BASE = -46.6564195;
+        private const double LATITUDE_BASE = -23.9557228;
+        private const double LONGITUDE_BASE = -46.3486396;
 
         public Point(double latitude, double longitude)
         {
             Latitude = latitude;
             Longitude = longitude;
-
+              
         }
 
         public Point()

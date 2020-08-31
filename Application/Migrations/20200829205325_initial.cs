@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace devboost.dronedelivery.felipe.Migrations
 {
-    public partial class cliente : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,8 +15,7 @@ namespace devboost.dronedelivery.felipe.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(maxLength: 100, nullable: false),
                     Latitude = table.Column<double>(nullable: false),
-                    Longitude = table.Column<double>(nullable: false),
-                    ClienteId = table.Column<int>(nullable: false)
+                    Longitude = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,7 +50,7 @@ namespace devboost.dronedelivery.felipe.Migrations
                     Situacao = table.Column<int>(nullable: false),
                     DataUltimaAlteracao = table.Column<DateTime>(nullable: false),
                     DataHoraFinalizacao = table.Column<DateTime>(nullable: false),
-                    ClienteId = table.Column<int>(nullable: true)
+                    ClienteId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,7 +60,7 @@ namespace devboost.dronedelivery.felipe.Migrations
                         column: x => x.ClienteId,
                         principalTable: "Cliente",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,18 +73,11 @@ namespace devboost.dronedelivery.felipe.Migrations
                     PedidoId = table.Column<int>(nullable: false),
                     Distancia = table.Column<double>(nullable: false),
                     StatusEnvio = table.Column<int>(nullable: false),
-                    DataHoraFinalizacao = table.Column<DateTime>(nullable: false),
-                    ClienteId = table.Column<int>(nullable: true)
+                    DataHoraFinalizacao = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PedidoDrones", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PedidoDrones_Cliente_ClienteId",
-                        column: x => x.ClienteId,
-                        principalTable: "Cliente",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_PedidoDrones_Drone_DroneId",
                         column: x => x.DroneId,
@@ -103,11 +95,6 @@ namespace devboost.dronedelivery.felipe.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Pedido_ClienteId",
                 table: "Pedido",
-                column: "ClienteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PedidoDrones_ClienteId",
-                table: "PedidoDrones",
                 column: "ClienteId");
 
             migrationBuilder.CreateIndex(

@@ -10,5 +10,7 @@ namespace devboost.dronedelivery.felipe.EF.Repositories.Interfaces
     {
         Task<List<Cliente>> Listar();
         Task InserirCliente(Cliente cliente);
+
+        Task<Cliente> Selecionar(int Id);
     }
 }

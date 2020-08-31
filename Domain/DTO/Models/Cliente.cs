@@ -20,6 +20,6 @@ namespace devboost.dronedelivery.felipe.DTO.Models
         [Required(ErrorMessage = "Longitude deve ser informada!")]
         public double Longitude { get; set; }
 
-
+        public List<Pedido> Pedidos { get; set; }
     }
 }

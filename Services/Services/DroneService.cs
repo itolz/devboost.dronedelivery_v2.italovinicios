@@ -34,16 +34,21 @@ namespace devboost.dronedelivery.felipe.Services
         /// <returns></returns>
         public async Task<DroneStatusDto> GetAvailiableDroneAsync(double distance, Pedido pedido)
         {
-            var drones = (await _pedidoDroneRepository.RetornaPedidosEmAberto())
+            var pedidosEmAberto =  await _pedidoDroneRepository.RetornaPedidosEmAberto();
+
+
+
+            var drones = (pedidosEmAberto)
                 .Select(d => new
                 {
-                    distance = _coordinateService.GetKmDistance(d.Cliente.GetPoint(), pedido.Cliente.GetPoint()),
+                    distance = _coordinateService.GetKmDistance(d.Pedido.Cliente.GetPoint(), pedido.Cliente.GetPoint()),
                     droneId = d.DroneId
                 }).OrderBy(p => p.distance);
 
 
 
-            if (drones != null)
+
+            if (drones != null && drones.Count() != 0)
             {
 
                 foreach (var drone in drones)

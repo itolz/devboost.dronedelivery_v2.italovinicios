@@ -42,6 +42,7 @@ namespace devboost.dronedelivery.felipe
         {
             services.AddSingleton<IDroneRepository, DroneRepository>();
             services.AddSingleton<IPedidoDroneRepository, PedidoDroneRepository>();
+            services.AddSingleton<IPedidoRepository, PedidoRepository>(); 
             services.AddSingleton<IPedidoService, PedidoService>();
             services.AddSingleton<IDroneService, DroneService>();
             services.AddSingleton<ICoordinateService, CoordinateService>();

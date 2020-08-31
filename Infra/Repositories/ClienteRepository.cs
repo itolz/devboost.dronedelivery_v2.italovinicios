@@ -34,5 +34,10 @@ namespace devboost.dronedelivery.felipe.EF.Repositories
         {
             return await _context.Cliente.ToListAsync();
         }
+
+        public async Task<Cliente> Selecionar(int Id)
+        {
+            return await _context.Cliente.FindAsync(Id);
+        }
     }
 }

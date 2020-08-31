@@ -19,9 +19,9 @@ namespace devboost.dronedelivery.felipe.Controllers
     {
         private readonly IDroneFacade _droneFacade;
         private readonly IDroneRepository _droneRepository;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
         public DronesController(IDroneRepository droneRepository, IDroneFacade droneFacade)
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
         {
             _droneFacade = droneFacade;
             _droneRepository = droneRepository;

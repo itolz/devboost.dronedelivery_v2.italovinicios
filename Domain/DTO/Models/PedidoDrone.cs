@@ -24,6 +24,5 @@ namespace devboost.dronedelivery.felipe.DTO.Models
         public int StatusEnvio { get; set; }
         public DateTime DataHoraFinalizacao { get; set; }
 
-        public Cliente Cliente { get; set; }
     }
 }

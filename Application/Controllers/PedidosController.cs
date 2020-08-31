@@ -19,9 +19,8 @@ namespace devboost.dronedelivery.felipe.Controllers
     {
         private readonly IPedidoFacade _pedidoFacade;
         private readonly IPedidoRepository _pedidoRepository;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
         public PedidosController(IPedidoRepository pedidoRepository, IPedidoFacade pedidoFacade)
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         {
             _pedidoFacade = pedidoFacade;
             _pedidoRepository = pedidoRepository;
@@ -51,7 +50,7 @@ namespace devboost.dronedelivery.felipe.Controllers
             pedido.Situacao = (int)StatusPedido.AGUARDANDO;
             await _pedidoRepository.SavePedidoAsync(pedido);
 
-            return CreatedAtAction("GetPedido", new { id = pedido.Id }, pedido);
+            return NoContent(); 
         }
 
 

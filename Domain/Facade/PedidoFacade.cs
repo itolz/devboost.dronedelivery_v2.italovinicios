@@ -1,6 +1,7 @@
 ﻿using devboost.dronedelivery.felipe.DTO.Enums;
 using devboost.dronedelivery.felipe.DTO.Models;
 using devboost.dronedelivery.felipe.EF.Data;
+using devboost.dronedelivery.felipe.EF.Repositories.Interfaces;
 using devboost.dronedelivery.felipe.Facade.Interface;
 using devboost.dronedelivery.felipe.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -15,10 +16,12 @@ namespace devboost.dronedelivery.felipe.Facade
     {
         private readonly DataContext _dataContext;
         private readonly IPedidoService _pedidoService;
-        public PedidoFacade(DataContext dataContext, IPedidoService pedidoFacade)
+        private readonly IClienteRepository _clienteRepository;
+        public PedidoFacade(DataContext dataContext, IPedidoService pedidoFacade, IClienteRepository clienteRepository)
         {
             _dataContext = dataContext;
             _pedidoService = pedidoFacade;
+            _clienteRepository = clienteRepository;
 
         }
         public async Task AssignDrone()
@@ -26,9 +29,13 @@ namespace devboost.dronedelivery.felipe.Facade
             var pedidos = await PegaPedidosAsync().ConfigureAwait(false);
             foreach (var pedido in pedidos)
             {
+                pedido.Cliente = await _clienteRepository.Selecionar(pedido.ClienteId);
+
                 var drone = await _pedidoService.DroneAtendePedido(pedido);
                 await AtualizaPedidoAsync(pedido).ConfigureAwait(false);
-                await AdicionarPedidoDrone(pedido, drone).ConfigureAwait(false);
+
+                if (drone != null)
+                    await AdicionarPedidoDrone(pedido, drone).ConfigureAwait(false);
 
             }
         }
